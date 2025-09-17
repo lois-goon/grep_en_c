@@ -1,0 +1,4 @@
+build/
+*.O
+*.out
+*.exe
