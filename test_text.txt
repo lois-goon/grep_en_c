@@ -1,0 +1,1 @@
+coucou je veux rechercher un caractère dans ce fichier 
