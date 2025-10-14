@@ -1,9 +1,10 @@
 #include "../include/utils.h"
+#include <stdbool.h>
 #include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
 
-// implementation des méthodes
+// implementation de ma IntList dynamique pour mon super egrep
 
 static void add(IntList *self, int value) {
 
@@ -42,14 +43,17 @@ static void remove_int(IntList *self, size_t index) {
   self->size--;
 };
 
-static int get_int(IntList *self, size_t index) {
+static bool get_int(IntList *self, size_t index, int *out_int) {
   if (self->size == 0) {
+    fprintf(stderr, "[Intlist::get] Erreur : Tentative de recuperation d'un "
+                    "element d'une liste vide");
 
-    return -1;
-  }
+    return false;
+  };
+  *out_int = self->data[index];
 
   // fonction
-  return (self->data[index]);
+  return true;
 };
 // constructeur de IntList
 
@@ -64,6 +68,6 @@ IntList *IntList_init(size_t init_capacity) {
   // assignation des méthodes
   list->add = add;
   list->remove = remove_int;
-  list->get = get;
+  list->get = get_int;
   return list;
 };
