@@ -55,6 +55,7 @@ static bool get_int(IntList *self, size_t index, int *out_int) {
   // fonction
   return true;
 };
+
 // constructeur de IntList
 
 IntList *IntList_init(size_t init_capacity) {

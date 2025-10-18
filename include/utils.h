@@ -19,7 +19,6 @@ struct IntList {
   bool (*get)(IntList *self, size_t index, int *out_int);
   void (*remove)(IntList *self, size_t index);
   
-  
 } ;
 
 //constructeur

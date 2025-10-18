@@ -1,3 +1,4 @@
+#include "../include/search_algo.h"
 #include "../include/utils.h"
 #include <stdbool.h>
 #include <stdio.h>
@@ -32,7 +33,22 @@ int main() {
     printf("Voici ma size %d \n", ma_Liste->size);
   };
 
+  ma_Liste->data[1] = 5;
+  printf("J'ai remplace le premier élement par un %d \n", ma_Liste->data[1]);
+  printf("Test de ma fonctione de preprocessing \n");
+
+  IntList *skip_table = IntList_init(256);
+  bool resul = preprocess("Hello nigga this my pattern et ca va calculer"
+                          "combien pour chaque lettre de l'aphabet, on"
+                          "peut skip de caractère avant de tomber dessus",
+                          skip_table);
+  for (int i = 0; i < skip_table->size - 1; i++) {
+    printf("Nombre de char a skip pour la %d-ème lettre : %d", i,
+           skip_table->data[i]);
+  };
+  free(skip_table->data);
+  free(skip_table);
   free(ma_Liste->data);
   free(ma_Liste);
   return 0;
-}
+};
