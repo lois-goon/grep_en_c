@@ -3,6 +3,7 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 int main() {
 
@@ -37,15 +38,34 @@ int main() {
   printf("J'ai remplace le premier élement par un %d \n", ma_Liste->data[1]);
   printf("Test de ma fonctione de preprocessing \n");
 
-  IntList *skip_table = IntList_init(256);
-  bool resul = preprocess("Hello nigga this my pattern et ca va calculer"
-                          "combien pour chaque lettre de l'aphabet, on"
-                          "peut skip de caractère avant de tomber dessus",
-                          skip_table);
-  for (int i = 0; i < skip_table->size - 1; i++) {
-    printf("Nombre de char a skip pour la %d-ème lettre : %d", i,
-           skip_table->data[i]);
-  };
+  IntList *skip_table = NULL;
+  bool resul = preprocess("Nigga", &skip_table);
+
+  // ... après ton appel à preprocess ...
+
+  printf("\n--- Contenu complet de la skip_table ---\n");
+  printf("Taille de la table: %d\n", skip_table->size);
+
+  for (int i = 0; i < skip_table->size; i++) {
+    int skip_value;
+    // On utilise ta méthode 'get' pour récupérer la valeur à l'index 'i'
+    bool success = skip_table->get(skip_table, i, &skip_value);
+
+    if (success) {
+      // Vérifie si le caractère est imprimable (ASCII 32 à 126)
+      if (i >= 32 && i <= 126) {
+        printf("Index %3d (char '%c'): %d\n", i, (char)i, skip_value);
+      } else {
+        // Pour les caractères non-imprimables (comme 'null', 'tab', etc.)
+        printf("Index %3d (non-pr)  : %d\n", i, skip_value);
+      }
+    } else {
+      // Ne devrait pas arriver si ta boucle est correcte
+      fprintf(stderr, "Erreur: Impossible de lire l'index %d\n", i);
+    }
+  }
+
+  // ... ensuite tu peux faire tes free() ...
   free(skip_table->data);
   free(skip_table);
   free(ma_Liste->data);

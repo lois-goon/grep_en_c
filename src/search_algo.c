@@ -6,13 +6,16 @@
 #include <string.h>
 
 // définition des fonctions
-bool preprocess(char *pattern, IntList *skip_table) {
-  skip_table = IntList_init(256);
-  for (int i = 0; i < skip_table->size; i++) {
-    skip_table->add(skip_table, strlen(pattern));
+bool preprocess(char *pattern, IntList **skip_table) {
+  if (*skip_table == NULL) {
+    *skip_table = IntList_init(256);
+  };
+  int pattern_len = strlen(pattern);
+  for (int i = 0; i < (*skip_table)->capacity; i++) {
+    (*skip_table)->add(*skip_table, pattern_len);
   };
   for (int i = 0; i < strlen(pattern) - 1; i++) {
-    skip_table->data[pattern[i]] = strlen(pattern) - 1 - i;
+    (*skip_table)->data[(int)pattern[i]] = pattern_len - 1 - i;
   };
   return true;
 };

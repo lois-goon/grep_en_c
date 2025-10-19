@@ -4,7 +4,7 @@
 #include "utils.h"
 #include <stdlib.h>
 
-bool preprocess(char *pattern, IntList *skip_table);
+bool preprocess(char *pattern, IntList **skip_table);
 
 bool same(char *str1, char *str2, int length);
 

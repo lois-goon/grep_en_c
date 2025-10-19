@@ -46,7 +46,7 @@ static void remove_int(IntList *self, size_t index) {
 static bool get_int(IntList *self, size_t index, int *out_int) {
   if (self->size == 0) {
     fprintf(stderr, "[Intlist::get] Erreur : Tentative de recuperation d'un "
-                    "element d'une liste vide");
+                    "element d'une liste vide \n");
 
     return false;
   };
