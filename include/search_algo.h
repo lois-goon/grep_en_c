@@ -8,6 +8,6 @@ bool preprocess(char *pattern, IntList **skip_table);
 
 bool same(char *str1, char *str2, int length);
 
-int search(char *needle,char *haystack);
+int search(char *needle,char *haystack, IntList *skip_table);
 
 #endif
